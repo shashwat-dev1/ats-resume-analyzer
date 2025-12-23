@@ -29,7 +29,9 @@ function App() {
     }
 
     try {
-      const response = await axios.post('/api/analyze', formData, {
+      // Use environment variable for API URL in production, or fallback to proxy in dev
+      const apiBaseUrl = import.meta.env.VITE_API_URL || '';
+      const response = await axios.post(`${apiBaseUrl}/api/analyze`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
